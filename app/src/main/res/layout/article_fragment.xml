@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.article.ArticleFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            tools:background="#44F"
+            android:layout_margin="10dp"/>
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginBottom="5dp"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:maxLines="1"
+
+            tools:text="@string/news_title_placeholder"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+            <TextView
+                android:id="@+id/author"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:drawablePadding="5dp"
+                android:layout_weight="1"
+                android:layout_marginLeft="10dp"
+                app:drawableLeftCompat="@drawable/ic_author"
+                tools:text="@tools:sample/full_names"
+                tools:ignore="RtlHardcoded" />
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginRight="10dp"
+                android:drawablePadding="10dp"
+                app:drawableLeftCompat="@drawable/ic_calendar"
+                tools:text="@tools:sample/date/ddmmyy"
+                tools:ignore="RtlHardcoded" />
+        </LinearLayout>
+        <TextView
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            tools:text="@string/loremipsum"
+            android:layout_marginTop="5dp"
+            android:layout_marginHorizontal="10dp"
+            android:scrollbars="vertical" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_margin="10dp"
+            android:layout_gravity="center_horizontal"
+            android:paddingHorizontal="30dp"
+            android:background="@drawable/button_background"
+            android:textAllCaps="false"
+
+            android:text="@string/news_source"
+            />
+    </LinearLayout>
+
+</FrameLayout>
+</layout>
