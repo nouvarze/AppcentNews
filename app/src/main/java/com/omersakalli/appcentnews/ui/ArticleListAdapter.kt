@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.omersakalli.appcentnews.R
@@ -16,7 +18,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class ArticleListAdapter(val onItemListener: OnItemListener) :
-    RecyclerView.Adapter<ArticleListAdapter.MyViewHolder>() {
+    PagingDataAdapter<Article, ArticleListAdapter.MyViewHolder>(ARTICLE_COMPARATOR) {
 
     val articleList = ArrayList<Article>()
 
@@ -39,11 +41,9 @@ class ArticleListAdapter(val onItemListener: OnItemListener) :
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.bind(articleList[position])
-    }
-
-    override fun getItemCount(): Int {
-        return articleList.size
+//        holder.bind(articleList[position])
+        val articleItem = getItem(position)
+        if(articleItem != null) (holder as MyViewHolder).bind(articleItem)
     }
 
 
@@ -83,6 +83,18 @@ class ArticleListAdapter(val onItemListener: OnItemListener) :
 
     interface OnItemListener {
         suspend fun onItemClick(position: Int)
+    }
+
+    companion object{
+        private val ARTICLE_COMPARATOR = object: DiffUtil.ItemCallback<Article>(){
+            override fun areItemsTheSame(oldItem: Article, newItem: Article): Boolean {
+                return oldItem.publishedAt == newItem.publishedAt
+            }
+
+            override fun areContentsTheSame(oldItem: Article, newItem: Article): Boolean {
+                return oldItem.publishedAt == newItem.publishedAt
+            }
+        }
     }
 }
 

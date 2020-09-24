@@ -8,15 +8,16 @@ import com.omersakalli.appcentnews.utils.Constants
 import java.lang.Exception
 
 class ArticlesPagingSource(
-    val searchQuery:String
+    private val service: NewsService,
+    private val query:String
 )
     : PagingSource<Int, Article>() {
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Article> {
         try {
             val page = params.key ?: 1
-            val prevKey = if (pageNumber > 1) pageNumber - 1 else null
-            val nextKey = if (response.items.isNotEmpty()) pageNumber + 1 else null
-            val response:List<Article> = RetrofitInstance.newsServiceInstance.getArticlesList(page,searchQuery,Constants.getApiKey()).body()!!.articles
+            val prevKey = if (page > 1) page - 1 else null
+            val response:List<Article> = service.getArticlesList(page,query,Constants.getApiKey()).body()!!.articles
+            val nextKey = if (response.isNotEmpty()) page + 1 else null
             return LoadResult.Page(
                 response,
                 prevKey,

@@ -8,13 +8,27 @@
     android:orientation="vertical"
     tools:context=".ui.home.HomeFragment">
 
-
-    <androidx.appcompat.widget.SearchView
+<!--    <com.google.android.material.textfield.TextInputLayout-->
+<!--        android:id="@+id/input_layout"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_margin="8dp"-->
+<!--        >-->
+<!--        -->
+<!--    </com.google.android.material.textfield.TextInputLayout>-->
+    <EditText
+        android:id="@+id/search_article"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/searchbox"
+        android:hint="@string/search_hint"
+        android:imeOptions="actionSearch"
+        android:inputType="textNoSuggestions"
+        android:selectAllOnFocus="true"
+        android:padding="5dp"
         android:layout_margin="5dp"
         />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/ArticlesRecyclerView"
