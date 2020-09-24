@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.omersakalli.appcentnews.R
 import com.omersakalli.appcentnews.databinding.FragmentHomeBinding
@@ -30,6 +31,8 @@ class WebviewFragment : Fragment() {
 
 
         binding.webview.loadUrl(this.requireArguments().getString("article_url")!!)
+
+        (activity as AppCompatActivity).supportActionBar!!.title = "News Source"
 
         return binding.root
     }

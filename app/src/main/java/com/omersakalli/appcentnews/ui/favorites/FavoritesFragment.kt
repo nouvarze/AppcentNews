@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -50,6 +51,7 @@ class FavoritesFragment : Fragment(),FavArticlesListAdapter.OnItemListener {
 
         initRecyclerView()
 
+        (activity as AppCompatActivity).supportActionBar!!.title = "Favorites"
         return root
     }
 

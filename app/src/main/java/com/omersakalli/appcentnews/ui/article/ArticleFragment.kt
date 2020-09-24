@@ -139,7 +139,6 @@ class ArticleFragment : Fragment() {
 
 
 
-
         return binding.root
     }
 

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.*
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -60,6 +61,7 @@ class HomeFragment : Fragment(), ArticleListAdapter.OnItemListener {
             initSearch(query)
         }
 
+        (activity as AppCompatActivity).supportActionBar!!.title = "Appcent NewsApp"
 
 //        homeViewModel.articles.observe(viewLifecycleOwner,{
 //            val adapter = ArticleListAdapter(this)
