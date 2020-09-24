@@ -6,7 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import com.omersakalli.appcentnews.R
+import com.omersakalli.appcentnews.databinding.FragmentHomeBinding
+import com.omersakalli.appcentnews.databinding.WebviewFragmentBinding
 
 class WebviewFragment : Fragment() {
 
@@ -15,18 +18,22 @@ class WebviewFragment : Fragment() {
     }
 
     private lateinit var viewModel: WebviewViewModel
+    private lateinit var binding: WebviewFragmentBinding
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.webview_fragment, container, false)
+        binding = DataBindingUtil.inflate(inflater,R.layout.webview_fragment,container,false)
+
+
+
+        binding.webview.loadUrl(this.requireArguments().getString("article_url")!!)
+
+        return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(WebviewViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
+
 
 }

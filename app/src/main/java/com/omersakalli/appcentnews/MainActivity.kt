@@ -26,14 +26,20 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
     }
 
+    override fun onBackPressed() {
 
-//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-//        val inflater = menuInflater
-//        inflater.inflate(R.menu.actionbar_menu,menu)
-//        return true
-//    }
+        if(supportFragmentManager.backStackEntryCount == 0)
+            super.onBackPressed()
+        else
+            supportFragmentManager.popBackStack()
+    }
 
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        return false
-//    }
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(item.itemId == android.R.id.home)
+            onBackPressed()
+        else super.onOptionsItemSelected(item)
+        return false
+    }
 }
