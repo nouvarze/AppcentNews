@@ -16,4 +16,6 @@ In nisl nisi scelerisque eu. At urna condimentum mattis pellentesque id nibh tor
     <string name="news_title_placeholder">News Title is Here!</string>
     <string name="news_source">News Source</string>
     <string name="search_hint">Haber ara...</string>
+    <string name="favorite">Favorite</string>
+    <string name="share">share</string>
 </resources>

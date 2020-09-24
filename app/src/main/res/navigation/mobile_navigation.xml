@@ -9,12 +9,33 @@
         android:id="@+id/navigation_home"
         android:name="com.omersakalli.appcentnews.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_articleFragment"
+            app:destination="@id/articleFragment" />
+    </fragment>
 
     <fragment
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_favorites"
         android:name="com.omersakalli.appcentnews.ui.favorites.FavoritesFragment"
         android:label="@string/title_favorites"
-        tools:layout="@layout/fragment_favorites" />
+        tools:layout="@layout/fragment_favorites" >
+        <action
+            android:id="@+id/action_navigation_favorites_to_articleFragment"
+            app:destination="@id/articleFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/articleFragment"
+        android:name="com.omersakalli.appcentnews.ui.article.ArticleFragment"
+        android:label="ArticleFragment" >
+        <action
+            android:id="@+id/action_articleFragment_to_webviewFragment"
+            app:destination="@id/webviewFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/webviewFragment"
+        android:name="com.omersakalli.appcentnews.ui.webview.WebviewFragment"
+        android:label="webview_fragment"
+        tools:layout="@layout/webview_fragment" />
 
 </navigation>

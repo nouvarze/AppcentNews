@@ -21,12 +21,14 @@ class HomeViewModel() : ViewModel() {
 //    }
 //    val text: LiveData<String> = _text
 
-    private val _articles = MutableLiveData<List<Article>>()
+//    private val _articles = MutableLiveData<List<Article>>()
 
     private var currentQueryValue: String? = null
     private var currentSearchResult: Flow<PagingData<Article>>? = null
 
     private val repository: NewsRepository = NewsRepository(RetrofitInstance.newsServiceInstance)
+
+//    private var articleToView: Article?=null
 
     fun searchRepo(queryString: String):Flow<PagingData<Article>>{
         val lastResult = currentSearchResult
@@ -39,6 +41,14 @@ class HomeViewModel() : ViewModel() {
         currentSearchResult=newResult
         return newResult
     }
+
+//    fun setArticleToView(article: Article){
+//        articleToView = article
+//    }
+
+//    fun getArticleToView():Article{
+//        return articleToView!!
+//    }
 
 //    val articles: LiveData<List<Article>> = _articles
 

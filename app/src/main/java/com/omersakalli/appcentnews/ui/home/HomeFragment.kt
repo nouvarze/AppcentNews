@@ -1,21 +1,22 @@
 package com.omersakalli.appcentnews.ui.home
 
 import android.os.Bundle
-import android.view.KeyEvent
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
+import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.omersakalli.appcentnews.R
+import com.omersakalli.appcentnews.data.model.Article
 import com.omersakalli.appcentnews.databinding.FragmentHomeBinding
 import com.omersakalli.appcentnews.ui.ArticleListAdapter
 import kotlinx.coroutines.Job
@@ -32,6 +33,11 @@ class HomeFragment : Fragment(), ArticleListAdapter.OnItemListener {
 
     private var searchJob: Job? = null
     val adapter = ArticleListAdapter(this)
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -80,9 +86,10 @@ class HomeFragment : Fragment(), ArticleListAdapter.OnItemListener {
         outState.putString(LAST_SEARCH_QUERY, binding.searchArticle.text.trim().toString())
     }
 
-    override suspend fun onItemClick(position: Int) {
-        //TODO("Not yet implemented")
-    }
+//    override suspend fun onItemClick(position: Int) {
+//        homeViewModel.setArticleToView(binding.ArticlesRecyclerView.article)
+//        findNavController().navigate(R.id.action_navigation_home_to_articleFragment)
+//    }
 
     private fun search(query:String){
         searchJob?.cancel()
@@ -141,6 +148,19 @@ class HomeFragment : Fragment(), ArticleListAdapter.OnItemListener {
 
     companion object {
         private const val LAST_SEARCH_QUERY: String = "last_search_query"
-        private const val DEFAULT_QUERY = "Android"
+        private const val ITEM_POSITION = "item_position"
     }
+
+    override suspend fun onItemClick(article: Article) {
+        val bundle = Bundle()
+        bundle.putParcelable("article",article)
+
+        findNavController().navigate(R.id.action_navigation_home_to_articleFragment,bundle)
+    }
+
+//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+//        val inflater: MenuInflater = MenuInflater(context)
+//        inflater.inflate(R.menu.actionbar_menu,menu)
+//        super.onCreateOptionsMenu(menu, inflater)
+//    }
 }

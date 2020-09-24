@@ -1,10 +1,13 @@
 package com.omersakalli.appcentnews.ui
 
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -46,6 +49,9 @@ class ArticleListAdapter(val onItemListener: OnItemListener) :
         if(articleItem != null) (holder as MyViewHolder).bind(articleItem)
     }
 
+    fun getArticle(position: Int):Article{
+        return getItem(position)!!
+    }
 
 
 
@@ -54,8 +60,10 @@ class ArticleListAdapter(val onItemListener: OnItemListener) :
         val onItemListener: OnItemListener
     ): RecyclerView.ViewHolder(binding.root), View.OnClickListener{
 
+        var data:Article?=null
 
         fun bind(article: Article){
+            data=article
             binding.apply {
                 NewsTitle.text  =article.title
                 NewsContent.text=article.description
@@ -73,16 +81,22 @@ class ArticleListAdapter(val onItemListener: OnItemListener) :
 
         override fun onClick(p0: View?) {
             CoroutineScope(Dispatchers.Main).launch {
-                onItemListener.onItemClick(adapterPosition)
+                onItemListener.onItemClick(data!!)
             }
         }
 
+//        init {
+//            binding.listItem.setOnClickListener {
+//                val bundle = Bundle()
+//                bundle.putParcelable("article",)
+//            }
+//        }
 
 
     }
 
     interface OnItemListener {
-        suspend fun onItemClick(position: Int)
+        suspend fun onItemClick(article: Article)
     }
 
     companion object{
