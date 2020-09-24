@@ -11,6 +11,11 @@ class ArticleViewModel(private val repository: ArticlesRepository) : ViewModel()
 
     val favArticles = repository.articles
 
+    fun toggleFavorite(article: Article) = viewModelScope.launch {
+
+
+    }
+
     fun addArticle(article:Article) = viewModelScope.launch {
         repository.add(article)
     }
@@ -19,7 +24,5 @@ class ArticleViewModel(private val repository: ArticlesRepository) : ViewModel()
         repository.remove(article)
     }
 
-    fun hasItem(article: Article) = viewModelScope.launch {
-        repository.hasItem(article)
-    }
+    fun hasItem(article: Article) = repository.hasItem(article)
 }

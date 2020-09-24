@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.omersakalli.appcentnews.R
 import com.omersakalli.appcentnews.data.db.FavoritesDatabase
@@ -67,6 +68,9 @@ class FavoritesFragment : Fragment(),FavArticlesListAdapter.OnItemListener {
     }
 
     override suspend fun onItemClick(article: Article) {
-        TODO("Not yet implemented")
+        val bundle = Bundle()
+        bundle.putParcelable("article",article)
+
+        findNavController().navigate(R.id.action_navigation_favorites_to_articleFragment,bundle)
     }
 }

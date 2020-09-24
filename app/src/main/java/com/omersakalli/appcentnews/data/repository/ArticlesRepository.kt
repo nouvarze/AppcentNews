@@ -14,7 +14,7 @@ class ArticlesRepository(private val dao:FavArticleDao) {
         dao.removeArticle(article)
     }
 
-    suspend fun hasItem(article: Article):Boolean{
+    fun hasItem(article: Article):Boolean{
         return dao.hasItem(article.url)
     }
 }

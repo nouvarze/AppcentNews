@@ -24,6 +24,7 @@ import com.omersakalli.appcentnews.data.model.Article
 import com.omersakalli.appcentnews.data.repository.ArticlesRepository
 import com.omersakalli.appcentnews.databinding.ArticleFragmentBinding
 import com.omersakalli.appcentnews.ui.home.HomeViewModel
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -65,12 +66,16 @@ class ArticleFragment : Fragment() {
         when (item.itemId) {
             R.id.action_favorite -> {
 
-                Toast.makeText(context, "Clicked on fav", Toast.LENGTH_LONG)
+//                Toast.makeText(context, "Clicked on fav", Toast.LENGTH_LONG)
 
-                lifecycleScope.launch { articleViewModel.addArticle(article!!) }
+//                CoroutineScope(Dispatchers.IO).launch { articleViewModel.toggleFavorite(article!!) }
 
                 articleViewModel.favArticles.observe(this, Observer {
-                    Log.i("MYTAG",it.toString())
+                    if(it.contains(article)){
+                        articleViewModel.removeArticle(article!!)
+                    }
+                    else articleViewModel.addArticle(article!!)
+
                 })
 
 //                lifecycleScope.launch(Dispatchers.IO) {
